@@ -23,4 +23,4 @@ public class AssertionScopeUnitTests
     }
 }
 
-public record Result(int Value, string Error);
+internal record Result(int Value, string Error);
