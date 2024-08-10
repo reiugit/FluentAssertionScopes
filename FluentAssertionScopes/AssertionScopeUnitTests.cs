@@ -8,19 +8,17 @@ public class AssertionScopeUnitTests
     [Fact]
     public void MultipleFails_ShouldBe_ListedAtOnce()
     {
-        const string result = "result_string";
+        (int number, string error) = (0, "Custom error");
 
-        // scope for multiple assertions
-        // so not only the first failure
-        // will be shown, but all of them.
+        // starting a scope for multiple assertions, so that
+        // not only the first failure will be shown, but all of them.
+
         using (new AssertionScope())
         {
-            result.Should().Contain("-");
-            result.Should().NotContain("_");
-            result.Should().Match("Result*");
-            result.Should().NotEndWith("string");
-            // These multiple assertions will throw together,
-            // at the moment the assertion-scope is disposed.
+            number.Should().NotBe(0);
+            error.Should().BeNullOrEmpty();
+            // Both assertions will throw together, at the
+            // moment this assertion-scope is disposed.
         }
     }
 }
