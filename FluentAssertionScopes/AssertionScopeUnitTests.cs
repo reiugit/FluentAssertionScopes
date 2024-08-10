@@ -11,14 +11,16 @@ public class AssertionScopeUnitTests
         const string result = "result_string";
 
         // scope for multiple assertions
-        // (these multiple assertions will throw
-        //  together, only when the scope is disposed)
+        // so not only the first failure
+        // will be shown, but all of them.
         using (new AssertionScope())
         {
             result.Should().Contain("-");
             result.Should().NotContain("_");
             result.Should().Match("Result*");
             result.Should().NotEndWith("string");
+            // These multiple assertions will throw together,
+            // at the moment the assertion-scope is disposed.
         }
     }
 }
